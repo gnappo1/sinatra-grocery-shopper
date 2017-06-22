@@ -1,0 +1,18 @@
+require './config/environment'
+
+class ShopperController < ApplicationController
+
+  get "/shoppers/signup" do
+    erb :'shoppers/signup'
+  end
+
+  post "/shoppers/signup" do
+    @shopper = Shopper.create(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], price_per_bag: params[:price_per_bag], location: params[:location], password: params[:password])
+    if @shopper.errors.empty?
+      session[:id] = @shopper.id
+      redirect "/shoppers/#{@shopper.id}"
+    else
+      redirect to "/shoppers/signup"
+    end
+  end
+end
