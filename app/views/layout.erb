@@ -6,8 +6,26 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+  
+  <ul>
+    <li><a href="/clients">Clients</a></li>
+    <li><a href="/shoppers">Shoppers</a></li>
+    <% if current_shopper%>
+      <li><a href="/shoppers/<%= current_shopper.id %>">Profile Page</a></li>
+      <li><a href="/lists">Lists</a></li>
+      <li><a href="/shoppers/<%= current_shopper.id %>/edit">Edit Profile</a></li>
+      <li><a href="/shoppers/<%= current_shopper.id %>/delete">Delete Profile</a></li>
+      <li><a href="/shoppers/logout">Logout</a></li>
+    <% elsif current_client%>
+      <li><a href="/clients/<%= current_client.id %>">Profile Page</a></li>
+      <li><a href="/lists">Lists</a></li>
+      <li><a href="/clients/<%= current_client.id %>/edit">Edit Profile</a></li>
+      <li><a href="/clients/<%= current_client.id %>/delete">Delete Profile</a></li>
+      <li><a href="/clients/logout">Logout</a></li>
+    <% end %>
+  </ul>
 
-  <title>Model</title>
+  <title>TheGroceryShopper</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -19,7 +37,7 @@
       <%= yield %>
 
     <footer class="branding">
-      <small>&copy; 2017 <strong>Model</strong></small>
+      <small>&copy; 2017 <strong>TheGroceryShopper</strong></small>
     </footer>
   </div>
 
