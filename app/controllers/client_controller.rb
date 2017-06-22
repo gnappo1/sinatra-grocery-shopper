@@ -16,4 +16,18 @@ class ClientController < ApplicationController
     end
   end
 
+  get "/clients/login" do
+    erb :"clients/login"
+  end
+
+  post "/clients/login" do
+    @client = Client.find_by_name(params[:name])
+    if @client && @client.authenticate(params[:password])
+      session[:id] = @client.id
+      redirect to "/clients/#{@client.id}"
+    else
+      redirect to "/clients/login"
+    end
+  end
+
 end
