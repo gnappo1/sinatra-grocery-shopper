@@ -35,4 +35,9 @@ class ShopperController < ApplicationController
     erb :"shoppers/show"
   end
 
+  get "/shoppers/:id/edit" do
+    @shopper = Shopper.find(params[:id])
+    erb :"/shoppers/edit"
+  end
+
 end
