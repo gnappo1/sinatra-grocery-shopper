@@ -30,4 +30,13 @@ class ClientController < ApplicationController
     end
   end
 
+  get "/clients/logout" do
+    if logged_in?
+      session.clear
+      redirect to "/clients/login"
+    else
+      redirect to "/"
+    end
+  end
+
 end
