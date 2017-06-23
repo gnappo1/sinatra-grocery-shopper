@@ -44,4 +44,9 @@ class ClientController < ApplicationController
     logged_in? ? (erb :"clients/index") : (erb :"clients/login")
   end
 
+  get '/clients/:id' do
+    @client = Client.find_by_id(params[:id])
+    logged_in? ? (erb :"clients/show") : (erb :"clients/login")
+  end
+
 end
