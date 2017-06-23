@@ -1,0 +1,26 @@
+<h1><%= @client.name %> </h1>
+<p>--------------------------------------------------------------------------</p>
+
+<div class="sidebar">
+  <h3>Contact:</h3><br>
+    <li><strong>Email:</strong> <%= @client.email %></li><br><br>
+    <li><strong>Telephone Number:</strong> <%= @client.tel_nbr %></li><br><br>
+    <li><strong>Address:</strong> <%= @client.address %></li><br>
+</div>
+
+<h1>Personal Shopper:</h1>
+<br><br>
+<% if @client.shopper != nil%>
+
+  <p><strong>Name: </strong><a href="/shoppers/<%= @client.shopper.id %>"><%= @client.shopper.name %></a>
+  <p><strong>Email: </strong><%= @client.shopper.email %>
+  <p><strong>Telephone Number: </strong><%= @client.shopper.tel_nbr %>
+  <p>--------------------------------------------------------------------------</p>
+<% else %>
+  <% if current_client && current_client.id == @client.id %>
+    <p>No Personal Shopper associated yet.<br> Click on <strong>Edit Profile</strong> to pick one!</p>
+  <% else %>
+    <p>No Personal Shopper associated yet.<br>
+  <% end %>
+  <p>--------------------------------------------------------------------------</p>
+<% end %>
