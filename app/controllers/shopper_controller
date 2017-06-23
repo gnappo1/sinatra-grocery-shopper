@@ -24,5 +24,10 @@ class ShopperController < ApplicationController
       redirect to "/"
     end
   end
-  
+
+  get "/shoppers" do
+    @shoppers = Shopper.all
+    logged_in? ? (erb :"shoppers/index") : (erb :"shoppers/login")
+  end
+
 end

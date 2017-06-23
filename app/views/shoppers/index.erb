@@ -1,0 +1,12 @@
+<h1>Welcome</h1><br>
+
+
+<h3>Here's the list of all our shoppers:</h3>
+
+<ul>
+<% @shoppers.each do |shopper| %>
+  <li><a href="/shoppers/<%= shopper.id %>"><%= shopper.name %> -- <%= shopper.location %>  --  <%= shopper.price_per_bag %> per bag</a></li>
+<% end %>
+</ul>
+
+<br><br>
