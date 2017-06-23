@@ -24,3 +24,32 @@
   <% end %>
   <p>--------------------------------------------------------------------------</p>
 <% end %>
+
+
+
+<br><br>
+
+
+  <div class="list">
+    <h1>Lists:</h1>
+    <br><br>
+    <% if  @client.lists.size > 0 %>
+      <p><% @client.lists.each do |list| %>
+        <% if current_client && current_client.id == @client.id %>
+          - <a href="/lists/<%= list.id %>"><%= list.name %></a>
+        <% else %>
+          - <%= list.name %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>No Lists to show.</p>
+    <% end %>
+  </div>
+
+  <br><br>
+
+  <% if current_client && current_client.id == @client.id %>
+    <p>Create a new <a href="/lists/new">list</a></p>
+  <% end %>
+
+  <p>--------------------------------------------------------------------------</p>
