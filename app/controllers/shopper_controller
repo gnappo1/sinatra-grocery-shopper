@@ -30,4 +30,9 @@ class ShopperController < ApplicationController
     logged_in? ? (erb :"shoppers/index") : (erb :"shoppers/login")
   end
 
+  get '/shoppers/:id' do
+    @shopper = Shopper.find_by_id(params[:id])
+    erb :"shoppers/show"
+  end
+
 end
