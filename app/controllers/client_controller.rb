@@ -39,4 +39,9 @@ class ClientController < ApplicationController
     end
   end
 
+  get "/clients" do
+    @clients = Client.all
+    logged_in? ? (erb :"clients/index") : (erb :"clients/login")
+  end
+
 end

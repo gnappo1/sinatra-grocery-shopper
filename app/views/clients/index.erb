@@ -1,0 +1,12 @@
+<h1>Welcome</h1><br>
+
+
+<h3>Here's the list of all our clients:</h3>
+
+<ul>
+<% @clients.each do |client| %>
+  <li><a href="/clients/<%= client.id %>"><%= client.name %> -- <%= client.lists.size %> list(s)</a></li>
+<% end %>
+</ul>
+
+<br><br>
