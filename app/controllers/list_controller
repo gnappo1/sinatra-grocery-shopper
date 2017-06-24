@@ -1,0 +1,10 @@
+require './config/environment'
+
+class ListController < ApplicationController
+
+
+  get "/lists" do
+    erb :"lists/index"
+  end
+
+end

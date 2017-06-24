@@ -1,0 +1,13 @@
+<h1>Your Lists:</h1>
+
+<ul>
+<% List.all.each do |list| %>
+  <% if current_client && list.client_id == current_client.id %>
+    <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %></a></li>
+  <% elsif current_shopper && list.shopper_id == current_shopper.id %>
+    <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %>  --  <%= list.client_id %></a></li>
+  <% end %>
+<% end %>
+</ul>
+
+<br><br>
