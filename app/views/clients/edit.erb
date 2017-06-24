@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 card box-shadow">
+    <h1>Edit Page</h1>
+    <form action="/clients/<%= @client.id %>" method="post">
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <div class="form">
+        <strong>Name:</strong> <input type="text" class="form_input" name="name" value="<%= @client.name %>">
+      </div>
+      <div class="form">
+        <strong>Email:</strong> <input type="text" class="form_input" name="email" value="<%= @client.email %>">
+      </div>
+      <div class="form">
+        <strong>Telephone Number:</strong> <input type="text" class="form_input" name="tel_nbr" value="<%= @client.tel_nbr %>">
+      </div>
+      <div class="form">
+        <strong>Address:</strong> <input type="text" class="form_input" name="address" value="<%= @client.address %>">
+      </div>
+      <div class="form">
+        <strong>Password:</strong> <input type="password" class="form_input" name="password" value="<%= @client.password %>">
+      </div>
+      <div class="form">
+        <strong>Personal Shopper:</strong>
+        <% Shopper.all.each do |shopper| %>
+          <input type="checkbox" class="form_input" name="shopper_id" value="<%= shopper.id %>" id="<%= shopper.name %>" <%='checked' if @client.shopper == shopper %>><%= shopper.name %>
+        <% end %>
+      </div>
+      <button type="submit" name="submit">Edit</button>
+    </form>
+  </div>
+</div>
