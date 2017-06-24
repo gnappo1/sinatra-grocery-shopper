@@ -11,4 +11,11 @@ class ListController < ApplicationController
     erb :"lists/new"
   end
 
+  post "/lists" do
+    @list = List.create(name: params[:name], creation_date: params[:creation_date], items_quantities: params[:items_quantities], notes: params[:notes])
+    @list.client_id = current_client.id
+    @list.shopper_id = current_client.shopper.id
+    @list.save ? (redirect to "/lists") : (redirect to "/lists/new")
+  end
+
 end
