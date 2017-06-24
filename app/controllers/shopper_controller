@@ -52,4 +52,12 @@ class ShopperController < ApplicationController
     redirect to "/shoppers/#{@shopper.id}"
   end
 
+  delete '/shoppers/:id/delete' do
+    @shopper = Shopper .find(params[:id])
+    redirect to "/shoppers" unless current_shopper == @shopper
+    @shopper.delete
+    session.clear
+    redirect to "/shoppers/signup"
+  end
+
 end
