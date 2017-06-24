@@ -1,5 +1,3 @@
-require './config/environment'
-
 class ClientController < ApplicationController
 
   get "/clients/signup" do
@@ -42,7 +40,11 @@ class ClientController < ApplicationController
 
   get "/clients" do
     @clients = Client.all
-    logged_in? ? (erb :"clients/index") : (erb :"clients/login")
+    if logged_in?
+      erb :"clients/index"
+    else
+      erb :"clients/login"
+    end
   end
 
   get '/clients/:id' do
