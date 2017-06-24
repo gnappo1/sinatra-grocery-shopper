@@ -16,6 +16,20 @@ class ShopperController < ApplicationController
     end
   end
 
+  get "/shoppers/login" do
+    erb :"shoppers/login"
+  end
+
+  post "/shoppers/login" do
+    @shopper = Shopper.find_by_name(params[:name])
+    if @shopper && @shopper.authenticate(params[:password])
+      session[:id] = @shopper.id
+      redirect to "/shoppers/#{@shopper.id}"
+    else
+      redirect to "/shoppers/login"
+    end
+  end
+
   get "/shoppers/logout" do
     if logged_in?
       session.clear
