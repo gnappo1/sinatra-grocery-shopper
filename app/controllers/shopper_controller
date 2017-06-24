@@ -74,5 +74,5 @@ class ShopperController < ApplicationController
     session.clear
     redirect to "/shoppers/signup"
   end
-  
+
 end

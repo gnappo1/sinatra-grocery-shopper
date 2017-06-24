@@ -34,4 +34,14 @@ class ListController < ApplicationController
     redirect to "/lists/#{@list.id}"
   end
 
+  delete '/lists/:id/delete' do
+    @list = List.find(params[:id])
+    if @list.client_id == current_client.id
+      @list.delete
+      redirect to "/lists"
+    else
+      redirect to "/lists"
+    end
+  end
+
 end

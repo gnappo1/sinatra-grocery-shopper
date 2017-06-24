@@ -7,4 +7,5 @@ end
 use Rack::MethodOverride
 use ShopperController
 use ClientController
+use ListController
 run ApplicationController
