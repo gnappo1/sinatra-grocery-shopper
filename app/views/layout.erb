@@ -34,21 +34,27 @@
   </style>
 
   <ul>
-    <li><a href="/clients">Clients</a></li>
-    <li><a href="/shoppers">Shoppers</a></li>
     <% if current_shopper%>
+      <li><a href="/clients">Clients</a></li>
+      <li><a href="/shoppers">Shoppers</a></li>
       <li><a href="/shoppers/<%= current_shopper.id %>">Profile Page</a></li>
       <li><a href="/lists">Lists</a></li>
       <li><a href="/shoppers/<%= current_shopper.id %>/edit">Edit Profile</a></li>
       <li><a href="/shoppers/<%= current_shopper.id %>/delete">Delete Profile</a></li>
       <li><a href="/shoppers/logout">Logout</a></li>
     <% elsif current_client%>
+      <li><a href="/clients">Clients</a></li>
+      <li><a href="/shoppers">Shoppers</a></li>
       <li><a href="/clients/<%= current_client.id %>">Profile Page</a></li>
       <li><a href="/lists">Lists</a></li>
       <li><a href="/clients/<%= current_client.id %>/edit">Edit Profile</a></li>
       <li><a href="/clients/<%= current_client.id %>/delete">Delete Profile</a></li>
       <li><a href="/clients/logout">Logout</a></li>
+    <% else %>
+      <li><a href="/clients/login">Clients</a></li>
+      <li><a href="/shoppers/login">Shoppers</a></li>
     <% end %>
+
   </ul>
 
   <title>TheGroceryShopper</title>
@@ -56,8 +62,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="stylesheet" href="/stylesheets/main.css" />
-</head>
-<body>
+  </head>
+  <body>
   <div class="wrapper">
 
       <%= yield %>
@@ -72,4 +78,4 @@
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
     <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
   <![endif]-->
-</body>
+  </body>
