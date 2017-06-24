@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 card box-shadow">
+    <h1>Edit List</h1>
+    <form action="/lists/<%= @list.id %>" method="post">
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <div class="form">
+        <strong>Name:</strong> <input type="text" class="form_input" name="name" value="<%= @list.name %>">
+      </div>
+      <div class="form">
+        <strong>Date of Creation:</strong> <input type="text" class="form_input" name="creation_date" value="<%= @list.creation_date %>">
+      </div>
+      <div class="form">
+        <strong>Items and Quantities:</strong> <input type="text" class="form_input" name="items_quantities" value="<%= @list.items_quantities %>">
+      </div>
+      <div class="form">
+        <strong>Notes:</strong> <input type="text" class="form_input" name="notes" value="<%= @list.notes %>">
+      </div>
+      <button type="submit" name="submit">Edit</button>
+    </form>
+  </div>
+</div>

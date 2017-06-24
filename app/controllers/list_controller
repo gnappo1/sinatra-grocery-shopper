@@ -23,4 +23,15 @@ class ListController < ApplicationController
     erb :"lists/show"
   end
 
+  get "/lists/:id/edit" do
+    @list = List.find(params[:id])
+    current_client && @list.client_id == current_client.id ? (erb :"lists/edit") : (redirect to "/lists")
+  end
+
+  patch "/lists/:id" do
+    @list = List.find(params[:id])
+    @list.update(name: params[:name], creation_date: params[:creation_date], items_quantities: params[:items_quantities], notes: params[:notes])
+    redirect to "/lists/#{@list.id}"
+  end
+
 end
