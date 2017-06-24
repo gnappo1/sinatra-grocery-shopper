@@ -40,4 +40,16 @@ class ShopperController < ApplicationController
     erb :"/shoppers/edit"
   end
 
+  patch "/shoppers/:id" do
+    @shopper = Client.find(params[:id])
+    @shopper.update(name: params[:name]) if !params[:name].empty?
+    @shopper.update(tel_nbr: params[:tel_nbr]) if !params[:tel_nbr].empty?
+    @shopper.update(location: params[:location]) if !params[:location].empty?
+    @shopper.update(price_per_bag: params[:price_per_bag]) if !params[:price_per_bag].empty?
+    @shopper.update(clients: params[:clients]) if !params[:clients].empty?
+    @shopper.update(email: params[:email]) if !params[:email].empty?
+    @shopper.update(password: params[:password]) if !params[:password].empty?
+    redirect to "/shoppers/#{@shopper.id}"
+  end
+
 end
