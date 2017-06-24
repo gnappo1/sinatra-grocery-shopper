@@ -9,6 +9,7 @@ class ClientController < ApplicationController
   post "/clients/signup" do
     @client = Client.create(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], address: params[:address], password: params[:password], shopper_id: params[:shopper_id])
     if @client.errors.messages.empty?
+      @client.save
       session[:id] = @client.id
       redirect "/clients/#{@client.id}"
     else

@@ -7,4 +7,8 @@ class ListController < ApplicationController
     erb :"lists/index"
   end
 
+  get "/lists/new" do
+    erb :"lists/new"
+  end
+
 end

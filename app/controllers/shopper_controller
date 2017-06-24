@@ -9,6 +9,7 @@ class ShopperController < ApplicationController
   post "/shoppers/signup" do
     @shopper = Shopper.create(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], price_per_bag: params[:price_per_bag], location: params[:location], password: params[:password])
     if @shopper.errors.empty?
+      @shopper.save
       session[:id] = @shopper.id
       redirect "/shoppers/#{@shopper.id}"
     else
