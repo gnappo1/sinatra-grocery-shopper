@@ -65,4 +65,13 @@ class ClientController < ApplicationController
     redirect to "/clients/#{@client.id}"
   end
 
+  delete '/clients/:id/delete' do
+    @client = Client.find(params[:id])
+    redirect to "/clients" unless current_client == @client
+    @client.delete
+    session.clear
+    redirect to "/clients/signup"
+  end
+
+
 end
