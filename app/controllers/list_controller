@@ -18,4 +18,9 @@ class ListController < ApplicationController
     @list.save ? (redirect to "/lists") : (redirect to "/lists/new")
   end
 
+  get "/lists/:id" do
+    @list = List.find_by_id(params[:id])
+    erb :"lists/show"
+  end
+
 end

@@ -1,0 +1,16 @@
+<h1><%= @list.name %> </h1>
+<br><br>
+<p>--------------------------------------------------------------------------</p>
+
+<p><strong>Date of Creation: </strong><%= @list.creation_date %></p><br>
+<p><strong>Items and Quantities: </strong><%= @list.items_quantities %></p><br>
+<p><strong>Notes: </strong><%= @list.notes %></p><br>
+
+<p>--------------------------------------------------------------------------</p>
+
+
+<a href="/lists/<%= @list.id %>/edit">Edit List</a><br><br>
+<form action="/lists/<%= @list.id %>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" name="submit" value="Delete List">
+</form>
