@@ -1,0 +1,44 @@
+<h1><%= @shopper.name %> </h1>
+<p>--------------------------------------------------------------------------</p>
+
+<div class="sidebar">
+  <h3>Contact:</h3><br>
+    <li><strong>Email:</strong> <%= @shopper.email %></li><br>
+    <li><strong>Telephone Number:</strong> <%= @shopper.tel_nbr %></li><br>
+    <li><strong>Price Per Bag:</strong> <%= @shopper.price_per_bag %></li><br>
+    <li><strong>Location:</strong> <%= @shopper.location %></li><br>
+
+</div>
+
+<div class="client">
+  <h1>Clients:</h1>
+  <br><br>
+  <% if  @shopper.clients.size > 0 %>
+    <p><% @shopper.clients.each do |client| %>
+      - <a href="/clients/<%= client.id %>"><%= client.name %>  --  <%= client.lists.size %> list(s)</a></p>
+    <% end %>
+  <% else %>
+    <p>No Clients to show.</p>
+  <% end %>
+</div>
+
+
+<br><br>
+<p>--------------------------------------------------------------------------</p>
+
+
+<br><br>
+<div class="list">
+  <h1>Lists:</h1>
+  <br><br>
+  <% if  @shopper.lists.size > 0 %>
+    <p><% @shopper.lists.each do |list| %>
+      - <a href="/lists/<%= list.id %>"><%= list.name %>  --  Client Id: <%= list.client_id %>  --  Created on: <%= list.creation_date %></a></p>
+    <% end %>
+  <% else %>
+    <p>No Lists to show.</p>
+  <% end %>
+</div>
+
+<br><br>
+<p>--------------------------------------------------------------------------</p>
