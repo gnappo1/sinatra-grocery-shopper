@@ -54,4 +54,15 @@ class ClientController < ApplicationController
     erb :"/clients/edit"
   end
 
+  patch "/clients/:id" do
+    @client = Client.find(params[:id])
+    @client.update(name: params[:name]) if !params[:name].empty?
+    @client.update(tel_nbr: params[:tel_nbr]) if !params[:tel_nbr].empty?
+    @client.update(address: params[:address]) if !params[:address].empty?
+    @client.update(shopper_id: params[:shopper_id]) if !params[:shopper_id].empty?
+    @client.update(email: params[:email]) if !params[:email].empty?
+    @client.update(password: params[:password]) if !params[:password].empty?
+    redirect to "/clients/#{@client.id}"
+  end
+
 end
