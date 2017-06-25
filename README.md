@@ -1,4 +1,4 @@
-# The Grocery Shopper
+# Sinatra Grocery Shopper App
 
 ## Overview
 
