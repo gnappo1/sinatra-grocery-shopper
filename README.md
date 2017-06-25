@@ -14,6 +14,10 @@ Signup as a shopper to help people with their daily grocery shopping and earn so
 4. Run rake db:seed.
 5. Run shotgun.
 
+## Contributions
+
+Bug reports and pull requests are more than welcome.
+
 ## License
 
 Standard MIT license located at ./LICENSE.
