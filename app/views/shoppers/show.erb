@@ -32,8 +32,12 @@
   <h1>Lists:</h1>
   <br><br>
   <% if  @shopper.lists.size > 0 %>
-    <p><% @shopper.lists.each do |list| %>
-      - <a href="/lists/<%= list.id %>"><%= list.name %>  --  Client Id: <%= list.client_id %>  --  Created on: <%= list.creation_date %></a></p>
+    <% @shopper.lists.each do |list| %>
+      <% if current_shopper && current_shopper.id == @shopper.id %>
+        <p> - <a href="/lists/<%= list.id %>"><%= list.name %>  --  Client Id: <%= list.client_id %>  --  Created on: <%= list.creation_date %></a></p>
+      <% else %>
+        <p> - <%= list.name %>  --  Client Id: <%= list.client_id %>  --  Created on: <%= list.creation_date %></p>
+      <% end %>
     <% end %>
   <% else %>
     <p>No Lists to show.</p>

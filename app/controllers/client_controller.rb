@@ -30,29 +30,25 @@ class ClientController < ApplicationController
   end
 
   get "/clients/logout" do
-    if logged_in?
-      session.clear
-      redirect to "/clients/login"
-    else
-      redirect to "/"
-    end
+    redirect to "/clients/login" unless logged_in?
+    session.clear
+    redirect to "/clients/login"
   end
 
   get "/clients" do
+    redirect to "/clients/login" unless logged_in?
     @clients = Client.all
-    if logged_in?
-      erb :"clients/index"
-    else
-      erb :"clients/login"
-    end
+    erb :"clients/index"
   end
 
   get '/clients/:id' do
+    redirect to "/clients/login" unless logged_in?
     @client = Client.find_by_id(params[:id])
-    logged_in? ? (erb :"clients/show") : (erb :"clients/login")
+    erb :"clients/show"
   end
 
   get "/clients/:id/edit" do
+    redirect to "/clients/login" unless logged_in?
     @client = Client.find(params[:id])
     erb :"/clients/edit"
   end
@@ -69,6 +65,7 @@ class ClientController < ApplicationController
   end
 
   delete '/clients/:id/delete' do
+    redirect to "/clients/login" unless logged_in?
     @client = Client.find(params[:id])
     redirect to "/clients" unless current_client == @client
     @client.delete

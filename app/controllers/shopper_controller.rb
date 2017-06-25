@@ -30,23 +30,27 @@ class ShopperController < ApplicationController
   end
 
   get "/shoppers/logout" do
-      session.clear
-      redirect to "/"
+    redirect to "/shoppers/login" unless logged_in?
+    session.clear
+    redirect to "/"
   end
 
   get "/shoppers" do
+    redirect to "/shoppers/login" unless logged_in?
     @shoppers = Shopper.all
-    logged_in? ? (erb :"shoppers/index") : (erb :"shoppers/login")
+    erb :"shoppers/index"
   end
 
   get '/shoppers/:id' do
+    redirect to "/shoppers/login" unless logged_in?
     @shopper = Shopper.find_by_id(params[:id])
     erb :"shoppers/show"
   end
 
   get "/shoppers/:id/edit" do
+    redirect to "/shoppers/login" unless logged_in?
     @shopper = Shopper.find(params[:id])
-    erb :"/shoppers/edit"
+    erb :"shoppers/edit"
   end
 
   patch "/shoppers/:id" do
@@ -62,6 +66,7 @@ class ShopperController < ApplicationController
   end
 
   delete '/shoppers/:id/delete' do
+    redirect to "/shoppers/login" unless logged_in?
     @shopper = Shopper.find(params[:id])
     redirect to "/shoppers" unless current_shopper == @shopper
     @shopper.delete

@@ -1,11 +1,21 @@
 <h1>Your Lists:</h1>
+<p>---------------------------------------</p>
 
+<br><br>
 <ul>
 <% List.all.each do |list| %>
   <% if current_client && list.client_id == current_client.id %>
-    <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %></a></li>
+    <% if current_client.lists.size > 0 %>
+      <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %></a></li>
+    <% else %>
+      <strong><h3> No lists to show</h3></strong>
+    <% end %>
   <% elsif current_shopper && list.shopper_id == current_shopper.id %>
-    <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %>  --  <%= list.client_id %></a></li>
+    <% if current_shopper.lists.size > 0 %>
+      <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %>  --  <%= list.client_id %></a></li>
+    <% else %>
+    <strong><h3> No lists to show</h3></strong>
+    <% end %>
   <% end %>
 <% end %>
 </ul>
