@@ -1,12 +1,12 @@
-The Grocery Shopper
+#The Grocery Shopper
 
-Overview
+##Overview
 
 The Grocery Shopper is a Sinatra web app which will allow you to make your food shopping way easier.
 Signup as a client to find your personal shopper, create and menage lists and  arrange the terms of your food delivery.
 Signup as a shopper to help people with their daily grocery shopping and earn some extra money!
 
-Installation
+##Installation
 
 1. Fork and clone the repo.
 2. Run bundle install.
@@ -14,6 +14,6 @@ Installation
 4. Run rake db:seed.
 5. Run shotgun.
 
-License
+##License
 
 Standard MIT license located at ./LICENSE.
