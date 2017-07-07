@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class ClientController < ApplicationController
+  use Rack::Flash
 
   get "/clients/signup" do
     erb :'clients/signup'
@@ -8,9 +11,11 @@ class ClientController < ApplicationController
     @client = Client.create(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], address: params[:address], password: params[:password], shopper_id: params[:shopper_id])
     if @client.errors.messages.empty?
       @client.save
+      flash[:message] = "You successfully created your brand new client account!"
       session[:id] = @client.id
       redirect "/clients/#{@client.id}"
     else
+      flash[:message] = @client.errors.full_messages.each{|message| message}
       redirect to "/clients/signup"
     end
   end
@@ -25,12 +30,14 @@ class ClientController < ApplicationController
       session[:id] = @client.id
       redirect to "/clients/#{@client.id}"
     else
+      flash[:message] = "Something went wrong with the username or password. Please try again."
       redirect to "/clients/login"
     end
   end
 
   get "/clients/logout" do
     redirect to "/clients/login" unless logged_in?
+    flash[:message] = "Successfully logged out."
     session.clear
     redirect to "/clients/login"
   end
@@ -55,12 +62,8 @@ class ClientController < ApplicationController
 
   patch "/clients/:id" do
     @client = Client.find(params[:id])
-    @client.update(name: params[:name]) if !params[:name].empty?
-    @client.update(tel_nbr: params[:tel_nbr]) if !params[:tel_nbr].empty?
-    @client.update(address: params[:address]) if !params[:address].empty?
-    @client.update(shopper_id: params[:shopper_id]) if !params[:shopper_id].empty?
-    @client.update(email: params[:email]) if !params[:email].empty?
-    @client.update(password: params[:password]) if !params[:password].empty?
+    @client.update(name: params[:name], address: params[:address], tel_nbr: params[:tel_nbr], email: params[:email])
+    flash[:message] = "Client successfully updated!"
     redirect to "/clients/#{@client.id}"
   end
 
@@ -70,6 +73,7 @@ class ClientController < ApplicationController
     redirect to "/clients" unless current_client == @client
     @client.delete
     session.clear
+    flash[:message] = "Client successfully deleted!"
     redirect to "/clients/signup"
   end
 

@@ -8,7 +8,7 @@
     <% if current_client.lists.size > 0 %>
       <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %></a></li>
     <% else %>
-      <strong><h3> No lists to show</h3></strong>
+      <strong><h3> No lists to show </h3></strong>
     <% end %>
   <% elsif current_shopper && list.shopper_id == current_shopper.id %>
     <% if current_shopper.lists.size > 0 %>

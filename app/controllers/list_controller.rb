@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class ListController < ApplicationController
+  use Rack::Flash
 
   get "/lists" do
     redirect to "/" unless logged_in?
@@ -14,7 +17,13 @@ class ListController < ApplicationController
     @list = List.create(name: params[:name], creation_date: params[:creation_date], items_quantities: params[:items_quantities], notes: params[:notes])
     @list.client_id = current_client.id
     @list.shopper_id = current_client.shopper.id
-    @list.save ? (redirect to "/lists") : (redirect to "/lists/new")
+    if @list.save
+      flash[:message] = "Successfully created a list!"
+      redirect to "/lists"
+    else
+      flash[:message] = parse_error_message(@list.errors.messages.first)
+      redirect to "/lists/new"
+    end
   end
 
   get "/lists/:id" do
@@ -32,6 +41,7 @@ class ListController < ApplicationController
   patch "/lists/:id" do
     @list = List.find(params[:id])
     @list.update(name: params[:name], creation_date: params[:creation_date], items_quantities: params[:items_quantities], notes: params[:notes])
+    flash[:message] = "Successfully updated the list!"
     redirect to "/lists/#{@list.id}"
   end
 
@@ -41,6 +51,7 @@ class ListController < ApplicationController
     if @list.client_id == current_client.id
       @list.delete
       redirect to "/lists"
+      flash[:message] = "Successfully deleted the list!"
     else
       redirect to "/lists"
     end

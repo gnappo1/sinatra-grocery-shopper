@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class ShopperController < ApplicationController
+  use Rack::Flash
 
   get "/shoppers/signup" do
     erb :'shoppers/signup'
@@ -11,6 +14,7 @@ class ShopperController < ApplicationController
       session[:id] = @shopper.id
       redirect "/shoppers/#{@shopper.id}"
     else
+      flash[:error] = error_parser(@shopper.errors.messages.first)
       redirect to "/shoppers/signup"
     end
   end
@@ -25,6 +29,7 @@ class ShopperController < ApplicationController
       session[:id] = @shopper.id
       redirect to "/shoppers/#{@shopper.id}"
     else
+      flash[:message] = "Something went wrong with the username or password. Please try again."
       redirect to "/shoppers/login"
     end
   end
@@ -32,6 +37,7 @@ class ShopperController < ApplicationController
   get "/shoppers/logout" do
     redirect to "/shoppers/login" unless logged_in?
     session.clear
+    flash[:message] = "Successfully logged out."
     redirect to "/"
   end
 
@@ -55,13 +61,8 @@ class ShopperController < ApplicationController
 
   patch "/shoppers/:id" do
     @shopper = Shopper.find(params[:id])
-    @shopper.update(name: params[:name]) if !params[:name].empty?
-    @shopper.update(tel_nbr: params[:tel_nbr]) if !params[:tel_nbr].empty?
-    @shopper.update(location: params[:location]) if !params[:location].empty?
-    @shopper.update(price_per_bag: params[:price_per_bag]) if !params[:price_per_bag].empty?
-    @shopper.update(clients: params[:clients]) if !params[:clients].empty?
-    @shopper.update(email: params[:email]) if !params[:email].empty?
-    @shopper.update(password: params[:password]) if !params[:password].empty?
+    @shopper.update(name: params[:name],tel_nbr: params[:tel_nbr], location: params[:location], price_per_bag: params[:price_per_bag], email: params[:email])
+    flash[:message] = "Shopper successfully updated!"
     redirect to "/shoppers/#{@shopper.id}"
   end
 
@@ -71,6 +72,7 @@ class ShopperController < ApplicationController
     redirect to "/shoppers" unless current_shopper == @shopper
     @shopper.delete
     session.clear
+    flash[:message] = "Shopper successfully deleted!"
     redirect to "/shoppers/signup"
   end
 

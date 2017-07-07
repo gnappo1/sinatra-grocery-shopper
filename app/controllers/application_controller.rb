@@ -31,6 +31,10 @@ class ApplicationController < Sinatra::Base
         redirect('/')
       end
     end
+
+    def error_parser(hash)
+      "#{hash[0].to_s} #{hash[1][0]}"
+    end
   end
 
 end
