@@ -49,3 +49,14 @@
 
 <br><br>
 <p>--------------------------------------------------------------------------</p>
+
+<% if current_shopper && current_shopper.id == @shopper.id %>
+
+<div class="col-md-1">
+  <form action="/shoppers/<%= @shopper.id %>/delete" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-danger" type="submit">Delete Profile</button>
+  </form>
+</div>
+
+<% end %>

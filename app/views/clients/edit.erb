@@ -35,6 +35,15 @@
       <div class="form">
         <strong>State:</strong><input type="text" class="form_input" name="state" value="<%= @client.state %>">
       </div>
+      <div class="form">
+        <strong>Password:</strong> <input type="password" class="form_input" name="password" value="<%= @client.password %>" >
+      </div>
+      <div class="form">
+        <strong>Personal Shopper:</strong>
+        <% Shopper.all.each do |shopper| %>
+          <input type="checkbox" class="form_input" name="shopper_id" value="<%= shopper.id %>" id="<%= shopper.name %>" <%='checked' if @client.shopper == shopper %>><%= shopper.name %>
+        <% end %>
+      </div>
       <button type="submit" name="submit">Edit</button>
     </form>
   </div>

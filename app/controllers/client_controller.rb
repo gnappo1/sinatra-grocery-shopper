@@ -62,12 +62,10 @@ class ClientController < ApplicationController
 
   patch "/clients/:id" do
     @client = Client.find(params[:id])
-    if @client.update(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], address_1: params[:address_1], address_2: params[:address_2], city: params[:city], zipcode: params[:zipcode], state: params[:state])
-      flash[:message] = "Client successfully updated!"
-      redirect to "/clients/#{@client.id}"
-    else
-      redirect to "/clients/:id/edit"
-    end
+    @client.update(name: params[:name],  email: params[:email], tel_nbr: params[:tel_nbr], address_1: params[:address_1], address_2: params[:address_2], city: params[:city], zipcode: params[:zipcode], state: params[:state], password: params[:password], shopper_id: params[:shopper_id])
+
+    flash[:message] = "Client successfully updated!"
+    redirect to "/clients/#{@client.id}"
   end
 
   delete '/clients/:id/delete' do

@@ -61,12 +61,9 @@ class ShopperController < ApplicationController
 
   patch "/shoppers/:id" do
     @shopper = Shopper.find(params[:id])
-    if @shopper.update(name: params[:name], tel_nbr: params[:tel_nbr], neighborhood: params[:neighborhood], city: params[:city], state: params[:state], price_per_bag: params[:price_per_bag], email: params[:email])
-      flash[:message] = "Shopper successfully updated!"
-      redirect to "/shoppers/#{@shopper.id}"
-    else
-      redirect to "/shoppers/:id/edit"
-    end
+    @shopper.update(name: params[:name], tel_nbr: params[:tel_nbr], neighborhood: params[:neighborhood], city: params[:city], state: params[:state], price_per_bag: params[:price_per_bag], email: params[:email], password: params[:password])
+    flash[:message] = "Shopper successfully updated!"
+    redirect to "/shoppers/#{@shopper.id}"
   end
 
   delete '/shoppers/:id/delete' do
