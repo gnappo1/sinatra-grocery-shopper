@@ -5,7 +5,7 @@
 
 <ul>
 <% @shoppers.each do |shopper| %>
-  <li><a href="/shoppers/<%= shopper.id %>"><%= shopper.name %> -- <%= shopper.location %>  --  <%= shopper.price_per_bag %> per bag</a></li>
+  <li><a href="/shoppers/<%= shopper.id %>"><%= shopper.name %> -- <%= shopper.neighborhood %>  --  <%= shopper.price_per_bag %> per bag</a></li>
 <% end %>
 </ul>
 

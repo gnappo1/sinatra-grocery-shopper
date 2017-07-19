@@ -8,13 +8,13 @@ class ShopperController < ApplicationController
   end
 
   post "/shoppers/signup" do
-    @shopper = Shopper.create(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], price_per_bag: params[:price_per_bag], location: params[:location], password: params[:password])
+    @shopper = Shopper.new(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], price_per_bag: params[:price_per_bag], neighborhood: params[:neighborhood], city: params[:city], state: params[:state], password: params[:password])
     if @shopper.errors.empty?
       @shopper.save
       session[:id] = @shopper.id
       redirect "/shoppers/#{@shopper.id}"
     else
-      flash[:error] = error_parser(@shopper.errors.messages.first)
+      flash[:message] = error_parser(@shopper.errors.messages.first)
       redirect to "/shoppers/signup"
     end
   end
@@ -61,9 +61,12 @@ class ShopperController < ApplicationController
 
   patch "/shoppers/:id" do
     @shopper = Shopper.find(params[:id])
-    @shopper.update(name: params[:name],tel_nbr: params[:tel_nbr], location: params[:location], price_per_bag: params[:price_per_bag], email: params[:email])
-    flash[:message] = "Shopper successfully updated!"
-    redirect to "/shoppers/#{@shopper.id}"
+    if @shopper.update(name: params[:name], tel_nbr: params[:tel_nbr], neighborhood: params[:neighborhood], city: params[:city], state: params[:state], price_per_bag: params[:price_per_bag], email: params[:email])
+      flash[:message] = "Shopper successfully updated!"
+      redirect to "/shoppers/#{@shopper.id}"
+    else
+      redirect to "/shoppers/:id/edit"
+    end
   end
 
   delete '/shoppers/:id/delete' do

@@ -2,22 +2,20 @@
 <p>---------------------------------------</p>
 
 <br><br>
-<ul>
-<% List.all.each do |list| %>
-  <% if current_client && list.client_id == current_client.id %>
-    <% if current_client.lists.size > 0 %>
-      <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %></a></li>
-    <% else %>
-      <strong><h3> No lists to show </h3></strong>
+
+
+<% if (current_client && current_client.lists.size > 0) || ( current_shopper && current_shopper.lists.size > 0) %>
+  <% List.all.each do |list| %>
+  <ul>
+    <% if current_client && list.client_id == current_client.id %>
+        <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %></a></li>
+    <% elsif current_shopper && list.shopper_id == current_shopper.id %>
+        <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %>  --  <%= list.client_id %></a></li>
     <% end %>
-  <% elsif current_shopper && list.shopper_id == current_shopper.id %>
-    <% if current_shopper.lists.size > 0 %>
-      <li><a href="/lists/<%= list.id %>"><%= list.name %> -- <%= list.creation_date %>  --  <%= list.client_id %></a></li>
-    <% else %>
-    <strong><h3> No lists to show</h3></strong>
-    <% end %>
+  </ul>
   <% end %>
+<% else %>
+  <strong><h4> No lists to show </h4></strong>
 <% end %>
-</ul>
 
 <br><br>

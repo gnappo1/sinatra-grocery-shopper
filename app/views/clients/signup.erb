@@ -11,24 +11,36 @@
     <h1>Sign up</h1>
     <form action="/clients/signup" method="post">
       <div class="form">
-        <input type="text" class="form_input" name="name" placeholder="Name" required>
+        <strong>Name:</strong><input type="text" class="form_input" name="name" placeholder="Name" required>
       </div>
       <div class="form">
-        <input type="text" class="form_input" name="email" placeholder="Email" required>
+        <strong>Email:</strong><input type="text" class="form_input" name="email" placeholder="Email" required>
       </div>
       <div class="form">
-        <input type="text" class="form_input" name="tel_nbr" placeholder="Telephone Number" required>
+        <strong>Telephone Number:</strong><input type="text" class="form_input" name="tel_nbr" placeholder="Telephone Number" required>
       </div>
       <div class="form">
-        <input type="text" class="form_input" name="address" placeholder="Full Address" required>
+        <strong>Address:</strong><input type="text" class="form_input" name="address_1" placeholder="Address" required>
       </div>
       <div class="form">
-        <input type="password" class="form_input" name="password" placeholder="Password" required>
+        <strong>Address (continue):</strong><input type="text" class="form_input" name="address_2" placeholder="Address (extension)" >
+      </div>
+      <div class="form">
+        <strong>City:</strong><input type="text" class="form_input" name="city" placeholder="City" required>
+      </div>
+      <div class="form">
+        <strong>Zipcode:</strong><input type="text" class="form_input" name="zipcode" placeholder="Zipcode" required>
+      </div>
+      <div class="form">
+        <strong>State:</strong><input type="text" class="form_input" name="state" placeholder="State(e.g. 'CA')" required>
+      </div>
+      <div class="form">
+        <strong>Password:</strong><input type="password" class="form_input" name="password" placeholder="Password" required>
       </div>
       <div class="form">
         <strong>Personal Shopper:</strong>
         <% Shopper.all.each do |shopper| %>
-          <input type="radio" class="form_input" name="shopper_id" value="<%= shopper.id %>" id="<%= shopper.name %>" required><%= shopper.name %>
+          <input type="radio" class="form_input" name="shopper_id" value="<%= shopper.id %>" id="<%= shopper.name %>" required><%= shopper.name %> - <%= shopper.city %> - <%= shopper.neighborhood %>
         <% end %>
       </div>
       <button type="submit" name="submit">Sign Up</button>

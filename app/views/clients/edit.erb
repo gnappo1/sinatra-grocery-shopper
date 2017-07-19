@@ -12,16 +12,28 @@
     <form action="/clients/<%= @client.id %>" method="post">
       <input id="hidden" type="hidden" name="_method" value="patch">
       <div class="form">
-        <strong>Name:</strong> <input type="text" class="form_input" name="name" value="<%= @client.name %>">
+        <strong>Name:</strong><input type="text" class="form_input" name="name" value="<%= @client.name %>">
       </div>
       <div class="form">
-        <strong>Email:</strong> <input type="text" class="form_input" name="email" value="<%= @client.email %>">
+        <strong>Email:</strong><input type="text" class="form_input" name="email" value="<%= @client.email %>">
       </div>
       <div class="form">
-        <strong>Telephone Number:</strong> <input type="text" class="form_input" name="tel_nbr" value="<%= @client.tel_nbr %>">
+        <strong>Telephone Number:</strong><input type="text" class="form_input" name="tel_nbr" value="<%= @client.tel_nbr %>">
       </div>
       <div class="form">
-        <strong>Address:</strong> <input type="text" class="form_input" name="address" value="<%= @client.address %>">
+        <strong>Address:</strong><input type="text" class="form_input" name="address_1" value="<%= @client.address_1 %>">
+      </div>
+      <div class="form">
+        <strong>Address (continue):</strong><input type="text" class="form_input" name="address_2" value="<%= @client.address_2 %>" >
+      </div>
+      <div class="form">
+        <strong>City:</strong><input type="text" class="form_input" name="city" value="<%= @client.city %>">
+      </div>
+      <div class="form">
+        <strong>Zipcode:</strong><input type="text" class="form_input" name="zipcode" value="<%= @client.zipcode %>">
+      </div>
+      <div class="form">
+        <strong>State:</strong><input type="text" class="form_input" name="state" value="<%= @client.state %>">
       </div>
       <button type="submit" name="submit">Edit</button>
     </form>

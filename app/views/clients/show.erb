@@ -5,7 +5,13 @@
   <h3>Contact:</h3><br>
     <li><strong>Email:</strong> <%= @client.email %></li><br><br>
     <li><strong>Telephone Number:</strong> <%= @client.tel_nbr %></li><br><br>
-    <li><strong>Address:</strong> <%= @client.address %></li><br>
+    <li><strong>Address:</strong> <%= @client.address_1 %></li><br>
+    <% if @client.address_2 != nil%>
+      <li><strong>Address (extension):</strong> <%= @client.address_2 %></li><br>
+      <li><strong>City:</strong> <%= @client.city %></li><br>
+      <li><strong>Zipcode:</strong> <%= @client.zipcode %></li><br>
+      <li><strong>State:</strong> <%= @client.state %></li><br>
+    <% end %>
 </div>
 
 <h1>Personal Shopper:</h1>
@@ -30,26 +36,35 @@
 <br><br>
 
 
-  <div class="list">
-    <h1>Lists:</h1>
-    <br><br>
-    <% if  @client.lists.size > 0 %>
-      <p><% @client.lists.each do |list| %>
-        <% if current_client && current_client.id == @client.id %>
-          - <a href="/lists/<%= list.id %>"><%= list.name %></a>
-        <% else %>
-          - <%= list.name %>
-        <% end %>
-      <% end %>
-    <% else %>
-      <p>No Lists to show.</p>
-    <% end %>
-  </div>
-
+<div class="list">
+  <h1>Lists:</h1>
   <br><br>
-
-  <% if current_client && current_client.id == @client.id %>
-    <p>Create a new <a href="/lists/new">list</a></p>
+  <% if  @client.lists.size > 0 %>
+    <p><% @client.lists.each do |list| %>
+      <% if current_client && current_client.id == @client.id %>
+        - <a href="/lists/<%= list.id %>"><%= list.name %></a>
+      <% else %>
+        - <%= list.name %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p>No Lists to show.</p>
   <% end %>
+</div>
 
-  <p>--------------------------------------------------------------------------</p>
+<br><br>
+
+<% if current_client && current_client.id == @client.id %>
+  <p>Create a new <a href="/lists/new">list</a></p>
+
+
+<p>--------------------------------------------------------------------------</p>
+
+<div class="col-md-1">
+  <form action="/clients/<%= @client.id %>/delete" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-danger" type="submit">Delete Profile</button>
+  </form>
+</div>
+
+<% end %>

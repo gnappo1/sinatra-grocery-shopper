@@ -8,14 +8,14 @@ class ClientController < ApplicationController
   end
 
   post "/clients/signup" do
-    @client = Client.create(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], address: params[:address], password: params[:password], shopper_id: params[:shopper_id])
+    @client = Client.new(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], address_1: params[:address_1], address_2: params[:address_2], city: params[:city], zipcode: params[:zipcode], state: params[:state], password: params[:password], shopper_id: params[:shopper_id])
     if @client.errors.messages.empty?
       @client.save
-      flash[:message] = "You successfully created your brand new client account!"
       session[:id] = @client.id
       redirect "/clients/#{@client.id}"
+      flash[:message] = "You successfully created your brand new client account!"
     else
-      flash[:message] = @client.errors.full_messages.each{|message| message}
+      flash[:message] = error_parser(@client.errors.messages.first)
       redirect to "/clients/signup"
     end
   end
@@ -62,9 +62,12 @@ class ClientController < ApplicationController
 
   patch "/clients/:id" do
     @client = Client.find(params[:id])
-    @client.update(name: params[:name], address: params[:address], tel_nbr: params[:tel_nbr], email: params[:email])
-    flash[:message] = "Client successfully updated!"
-    redirect to "/clients/#{@client.id}"
+    if @client.update(name: params[:name], email: params[:email], tel_nbr: params[:tel_nbr], address_1: params[:address_1], address_2: params[:address_2], city: params[:city], zipcode: params[:zipcode], state: params[:state])
+      flash[:message] = "Client successfully updated!"
+      redirect to "/clients/#{@client.id}"
+    else
+      redirect to "/clients/:id/edit"
+    end
   end
 
   delete '/clients/:id/delete' do
