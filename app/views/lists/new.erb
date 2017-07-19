@@ -1,26 +1,19 @@
-<% if flash.has?(:message) %>
-  <div class="alert alert-danger alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <%= flash[:message] %>
-  </div>
-<% end %>
-
 <div class="row">
   <div class="col-md-3"></div>
   <div class="col-md-6 card box-shadow">
     <h1>Create List</h1>
     <form action="/lists" method="post">
       <div class="form">
-        <strong>Name:</strong> <input type="text" class="form_input" name="name" placeholder="Name" required>
+        <strong>Name:</strong> <input type="text" class="form_input" name="list[name]" placeholder="Name" required>
       </div>
       <div class="form">
-        <strong>Date of Creation:</strong> <input type="text" class="form_input" name="creation_date" placeholder="YYYY-MM-DD" required>
+        <strong>Date of Creation:</strong> <input type="text" class="form_input" name="list[creation_date]" placeholder="YYYY-MM-DD" required>
       </div>
       <div class="form">
-        <strong>Items and Quantities:</strong> <input type="text" class="form_input" name="items_quantities" placeholder="Items and Quantities" required>
+        <strong>Items and Quantities:</strong> <input type="text" class="form_input" name="list[items_quantities]" placeholder="Items and Quantities" required>
       </div>
       <div class="form">
-        <strong>Notes:</strong> <input type="text" class="form_input" name="notes" placeholder="Notes">
+        <strong>Notes:</strong> <input type="text" class="form_input" name="list[notes]" placeholder="Notes">
       </div>
       <button type="submit" name="submit">Create</button>
     </form>

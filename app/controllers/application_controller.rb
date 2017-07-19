@@ -15,21 +15,19 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def current_shopper
-      @current_shopper ||= Shopper.find_by(id: session[:id])
+      @current_shopper ||= Shopper.find_by(id: session[:shopper_id]) if session[:shopper_id]
     end
 
     def current_client
-      @current_client ||= Client.find_by(id: session[:id])
+      @current_client ||= Client.find_by(id: session[:client_id]) if session[:client_id]
     end
 
     def logged_in?
-      !!session[:id]
+      !!current_shopper || !!current_client
     end
 
-    def not_logged_in?
-      if !logged_in?
-        redirect('/')
-      end
+    def authenticate_user
+      redirect to '/' if !logged_in?
     end
 
     def error_parser(hash)
